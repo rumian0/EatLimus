@@ -6,7 +6,8 @@
     <meta itemprop="name" content="吃掉莉姆丝" />
     <meta itemprop="description" content="limsuki！" />
     <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, width=device-width,target-densitydpi=device-dpi" />
+    <meta name="viewport"
+          content="initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, width=device-width,target-densitydpi=device-dpi" />
     <link href="./static/index.css" rel="stylesheet" type="text/css">
     <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
     <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
@@ -22,7 +23,8 @@
             <div id="GameScoreLayer-score" style="margin:10px 0;">得分</div>
             <div id="GameScoreLayer-bast">最佳</div>
             <button type="button" class="btn btn-secondary btn-lg" onclick="replayBtn()">重来</button>
-            <button type="button" class="btn btn-secondary btn-lg" onclick="window.location.href='https://github.com/arcxingye/EatKano'">开源</button>
+            <button type="button" class="btn btn-secondary btn-lg"
+                    onclick="window.location.href='https://github.com/arcxingye/EatKano'">开源</button>
         </div>
     </div>
     </div>
@@ -38,16 +40,32 @@
                 <br />
                 <div id="btn_group" style="display: block;">
                     <div class="dropdown">
-                        <a class="btn btn-primary btn-lg dropdown-toggle" href="javascript: void(0);" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">点击开始</a>
+                        <a class="btn btn-primary btn-lg dropdown-toggle" href="javascript: void(0);" role="button"
+                           id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">点击开始</a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <li><a class="dropdown-item btn-lg" onclick="readyBtn(MODE_NORMAL)">普通模式</a></li>
                             <li><a class="dropdown-item btn-lg" onclick="readyBtn(MODE_ENDLESS)">无尽模式</a></li>
                             <li><a class="dropdown-item btn-lg" onclick="readyBtn(MODE_PRACTICE)">练习模式</a></li>
                         </ul>
                     </div>
-                    <br/>
+                    <br />
+                </div>
+                <!-- 此为无排行榜版本，隐藏了名字留言 -->
+                <div class="input-group mb-3" style="display: none;">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">名字</span>
+                    </div>
+                    <input type="text" id="username" class="form-control" maxlength=8 placeholder="用于纪录排行(特殊字符会被过滤)">
+                </div>
+                <div class="input-group mb-3" style="display: none;">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">留言</span>
+                    </div>
+                    <input type="text" id="message" class="form-control" maxlength=50 placeholder="禁广告/脏话(本项可不填)">
+                </div>
             </div>
         </div>
+    </div>
     </div>
 
     <script src="./static/index.js"></script>
