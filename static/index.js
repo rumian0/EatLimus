@@ -1,6 +1,6 @@
 const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
 
-(function(w) {
+(function (w) {
     let isDesktop = !navigator['userAgent'].match(/(ipad|iphone|ipod|android|windows phone)/i);
     let fontunit = isDesktop ? 20 : ((window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth) / 320) * 10;
     document.write('<style type="text/css">' +
@@ -8,7 +8,7 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
         (isDesktop ? '#welcome,#GameTimeLayer,#GameLayerBG,#GameScoreLayer.SHADE{position: absolute;}' :
             '#welcome,#GameTimeLayer,#GameLayerBG,#GameScoreLayer.SHADE{position:fixed;}@media screen and (orientation:landscape) {#landscape {display: box; display: -webkit-box; display: -moz-box; display: -ms-flexbox;}}') +
         '</style>');
-    let map = {'d': 1, 'f': 2, 'j': 3, 'k': 4};
+    let map = { 'd': 1, 'f': 2, 'j': 3, 'k': 4 };
     if (isDesktop) {
         document.write('<div id="gameBody">');
         document.onkeydown = function (e) {
@@ -24,12 +24,12 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
         GameTimeLayer;
     let transform, transitionDuration, welcomeLayerClosed, mode;
 
-    w.init = function() {
+    w.init = function () {
         showWelcomeLayer();
         body = document.getElementById('gameBody') || document.body;
         body.style.height = window.innerHeight + 'px';
         transform = typeof (body.style.webkitTransform) != 'undefined' ? 'webkitTransform' : (typeof (body.style.msTransform) !=
-        'undefined' ? 'msTransform' : 'transform');
+            'undefined' ? 'msTransform' : 'transform');
         transitionDuration = transform.replace(/ransform/g, 'ransitionDuration');
         GameTimeLayer = document.getElementById('GameTimeLayer');
         GameLayer.push(document.getElementById('GameLayer1'));
@@ -47,13 +47,13 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
         window.addEventListener('resize', refreshSize, false);
     }
 
-    w.readyBtn = function(mod) {
+    w.readyBtn = function (mod) {
         mode = mod;
         closeWelcomeLayer();
         updatePanel();
     }
 
-    w.winOpen = function() {
+    w.winOpen = function () {
         window.open(location.href + '?r=' + Math.random(), 'nWin', 'height=500,width=320,toolbar=no,menubar=no,scrollbars=no');
         let opened = window.open('about:blank', '_self');
         opened.opener = null;
@@ -62,12 +62,12 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
 
     let refreshSizeTime;
 
-    w.refreshSize = function() {
+    w.refreshSize = function () {
         clearTimeout(refreshSizeTime);
         refreshSizeTime = setTimeout(_refreshSize, 200);
     }
 
-    w._refreshSize = function() {
+    w._refreshSize = function () {
         countBlockSize();
         for (let i = 0; i < GameLayer.length; i++) {
             let box = GameLayer[i];
@@ -95,7 +95,7 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
         a.style[transform] = 'translate3D(0,' + a.y + 'px,0)';
     }
 
-    w.countBlockSize = function() {
+    w.countBlockSize = function () {
         blockSize = body.offsetWidth / 4;
         body.style.height = window.innerHeight + 'px';
         GameLayerBG.style.height = window.innerHeight + 'px';
@@ -111,7 +111,7 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
 
     let _gameStartTime;
 
-    w.gameInit = function() {
+    w.gameInit = function () {
         createjs.Sound.registerSound({
             src: "./static/music/err.mp3",
             id: "err"
@@ -127,7 +127,7 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
         gameRestart();
     }
 
-    w.gameRestart = function() {
+    w.gameRestart = function () {
         _gameBBList = [];
         _gameBBListIndex = 0;
         _gameScore = 0;
@@ -141,7 +141,7 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
         updatePanel();
     }
 
-    w.gameStart = function() {
+    w.gameStart = function () {
         _date1 = new Date();
         _gameStart = true;
 
@@ -180,7 +180,7 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
         }
     }
 
-    w.gameOver = function() {
+    w.gameOver = function () {
         _gameOver = true;
         clearInterval(_gameTime);
         setTimeout(function () {
@@ -190,13 +190,13 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
     }
 
 
-    w.encrypt = function(text) {
+    w.encrypt = function (text) {
         let encrypt = new JSEncrypt();
         encrypt.setPublicKey("MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDTzGwX6FVKc7rDiyF3H+jKpBlRCV4jOiJ4JR33qZPVXx8ahW6brdBF9H1vdHBAyO6AeYBumKIyunXP9xzvs1qJdRNhNoVwHCwGDu7TA+U4M7G9FArDG0Y6k4LbS0Ks9zeRBMiWkW53yQlPshhtOxXCuZZOMLqk1vEvTCODYYqX5QIDAQAB");
         return encrypt.encrypt(text);
     }
 
-    w.SubmitResults = function() {
+    w.SubmitResults = function () {
         let system = "其他操作系统";
         let area = "异世界";
         if (document.getElementById("username").value) {
@@ -218,14 +218,14 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
         }
     }
 
-    w.creatTimeText = function(n) {
+    w.creatTimeText = function (n) {
         return '&nbsp;TIME:' + Math.ceil(n);
     }
 
     let _ttreg = / t{1,2}(\d+)/,
         _clearttClsReg = / t{1,2}\d+| bad/;
 
-    w.refreshGameLayer = function(box, loop, offset) {
+    w.refreshGameLayer = function (box, loop, offset) {
         let i = Math.floor(Math.random() * 1000) % 4 + (loop ? 0 : 4);
         for (let j = 0; j < box.children.length; j++) {
             let r = box.children[j],
@@ -264,7 +264,7 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
         box.style[transitionDuration] = '150ms';
     }
 
-    w.gameLayerMoveNextRow = function() {
+    w.gameLayerMoveNextRow = function () {
         for (let i = 0; i < GameLayer.length; i++) {
             let g = GameLayer[i];
             g.y += blockSize;
@@ -276,7 +276,7 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
         }
     }
 
-    w.gameTapEvent = function(e) {
+    w.gameTapEvent = function (e) {
         if (_gameOver) {
             return false;
         }
@@ -315,7 +315,7 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
         return false;
     }
 
-    w.createGameLayer = function() {
+    w.createGameLayer = function () {
         let html = '<div id="GameLayerBG">';
         for (let i = 1; i <= 2; i++) {
             let id = 'GameLayer' + i;
@@ -333,14 +333,14 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
         return html;
     }
 
-    w.closeWelcomeLayer = function() {
+    w.closeWelcomeLayer = function () {
         welcomeLayerClosed = true;
         let l = document.getElementById('welcome');
         l.style.display = 'none';
         updatePanel();
     }
 
-    w.showWelcomeLayer = function() {
+    w.showWelcomeLayer = function () {
         welcomeLayerClosed = false;
         let l = document.getElementById('welcome');
         l.style.display = 'block';
@@ -358,7 +358,7 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
         return mode === MODE_ENDLESS ? score.toFixed(2) : score.toString();
     }
 
-    w.showGameScoreLayer = function() {
+    w.showGameScoreLayer = function () {
         let l = document.getElementById('GameScoreLayer');
         let c = document.getElementById(_gameBBList[_gameBBListIndex - 1].id).className.match(_ttreg)[1];
         let score = (mode === MODE_ENDLESS ? parseFloat(getCPS().toFixed(2)) : _gameScore);
@@ -374,23 +374,23 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
         l.style.display = 'block';
     }
 
-    w.hideGameScoreLayer = function() {
+    w.hideGameScoreLayer = function () {
         let l = document.getElementById('GameScoreLayer');
         l.style.display = 'none';
     }
 
-    w.replayBtn = function() {
+    w.replayBtn = function () {
         gameRestart();
         hideGameScoreLayer();
     }
 
-    w.backBtn = function() {
+    w.backBtn = function () {
         gameRestart();
         hideGameScoreLayer();
         showWelcomeLayer();
     }
 
-    w.shareText = function(score) {
+    w.shareText = function (score) {
         if (mode === MODE_NORMAL) {
             let date2 = new Date();
             deviation_time = (date2.getTime() - _date1.getTime())
@@ -408,7 +408,7 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
         return '单杀lms是吧';
     }
 
-    w.toStr = function(obj) {
+    w.toStr = function (obj) {
         if (typeof obj === 'object') {
             return JSON.stringify(obj);
         } else {
@@ -416,7 +416,7 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
         }
     }
 
-    w.cookie = function(name, value, time) {
+    w.cookie = function (name, value, time) {
         if (name) {
             if (value) {
                 if (time) {
@@ -429,7 +429,7 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
             }
             return value = document.cookie.match("(?:^|;)\\s*" + name.replace(/([-.*+?^${}()|[\]\/\\])/g, "\\$1") + "=([^;]*)"),
                 value = value && "string" == typeof value[1] ? unescape(value[1]) : !1, (/^(\{|\[).+\}|\]$/.test(value) ||
-                /^[0-9]+$/g.test(value)) && eval("value=" + value), value;
+                    /^[0-9]+$/g.test(value)) && eval("value=" + value), value;
         }
         let data = {};
         value = document.cookie.replace(/\s/g, "").split(";");
@@ -439,10 +439,10 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
 
     document.write(createGameLayer());
 
-    w.initSetting = function() {
+    w.initSetting = function () {
         document.getElementById("username").value = cookie("username") ? cookie("username") : "";
         document.getElementById("message").value = cookie("message") ? cookie("message") : "";
-        document.getElementsByTagName("title")[0].innerText = cookie("title") ? cookie("title") : "吃掉莉姆丝";
+        document.getElementsByTagName("title")[0].innerText = cookie("title") ? cookie("title") : "吃掉茗辰原";
         if (cookie("keyboard")) {
             document.getElementById("keyboard").value = cookie("keyboard");
             map = {}
@@ -453,19 +453,19 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
         }
     }
 
-    w.show_btn = function() {
+    w.show_btn = function () {
         document.getElementById("btn_group").style.display = "block"
         document.getElementById("setting").style.display = "none"
         document.getElementById("desc").style.display = "block"
     }
 
-    w.show_setting = function() {
+    w.show_setting = function () {
         document.getElementById("btn_group").style.display = "none"
         document.getElementById("setting").style.display = "block"
         document.getElementById("desc").style.display = "none"
     }
 
-    w.save_cookie = function() {
+    w.save_cookie = function () {
         cookie('username', document.getElementById("username").value, 100);
         cookie('message', document.getElementById("message").value, 100);
         cookie('keyboard', document.getElementById("keyboard").value, 100);
@@ -473,12 +473,12 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
         initSetting();
     }
 
-    w.isnull = function(val) {
+    w.isnull = function (val) {
         let str = val.replace(/(^\s*)|(\s*$)/g, '');
         return str === '' || str === undefined || str == null;
     }
 
-    w.goRank = function() {
+    w.goRank = function () {
         let name = document.getElementById("username").value;
         let link = './rank.php';
         if (!isnull(name)) {
@@ -515,7 +515,7 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
     function saveImage(dom, callback) {
         if (dom.files && dom.files[0]) {
             let reader = new FileReader();
-            reader.onload = function() {
+            reader.onload = function () {
                 callback(this.result);
             }
             reader.readAsDataURL(dom.files[0]);
@@ -523,12 +523,12 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
     }
 
 
-    w.getClickBeforeImage = function() {
+    w.getClickBeforeImage = function () {
         const img = document.getElementById('click-before-image');
         img.click();
     }
 
-    w.saveClickBeforeImage = function() {
+    w.saveClickBeforeImage = function () {
         const img = document.getElementById('click-before-image');
         saveImage(img, r => {
             clickBeforeStyle.innerHTML = `
@@ -539,12 +539,12 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
         })
     }
 
-    w.getClickAfterImage = function() {
+    w.getClickAfterImage = function () {
         const img = document.getElementById('click-after-image');
         img.click();
     }
 
-    w.saveClickAfterImage = function() {
+    w.saveClickAfterImage = function () {
         const img = document.getElementById('click-after-image');
         saveImage(img, r => {
             clickAfterStyle.innerHTML = `
@@ -554,4 +554,4 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
             }`;
         })
     }
-}) (window);
+})(window);
